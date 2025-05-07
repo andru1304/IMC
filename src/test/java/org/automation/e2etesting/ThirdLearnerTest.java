@@ -9,13 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import poms.*;
 
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ThirdTestLearner extends BaseTest{
+public class ThirdLearnerTest extends BaseTest {
     private LoginPage loginPage;
 
     @BeforeEach
@@ -29,7 +30,7 @@ public class ThirdTestLearner extends BaseTest{
     @Story("Learner and Admin can login and access the system")
     @Description("This test verifies the login functionality for a learner user and an admin user.")
     @Test
-    public void thirdTestLearner() {
+    public void thirdLearnerTest() {
         logger.info("Starting ThirdTestLearner test");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String userLoginNameValue = DefaultValues.DEFAULT_USERNAME_2015; // Use default username

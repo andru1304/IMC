@@ -1,4 +1,4 @@
-package org.automation.e2etesting;
+package poms;
 
 public class DefaultValues {
     public static final String DEFAULT_USERNAME_2012 = "mystaffuser2012";

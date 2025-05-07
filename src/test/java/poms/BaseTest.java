@@ -1,4 +1,4 @@
-package org.automation.e2etesting;
+package poms;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,4 +1,4 @@
-package org.automation.e2etesting;
+package poms;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;

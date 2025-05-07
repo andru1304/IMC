@@ -6,10 +6,11 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import poms.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SecondTestLearner extends BaseTest{
+public class SecondLearnerTest extends BaseTest {
     private LoginPage loginPage;
 
     @BeforeEach
@@ -23,7 +24,7 @@ public class SecondTestLearner extends BaseTest{
     @Story("Learner can login and access the catalogue")
     @Description("This test verifies the login and catalogue functionality for a learner user.")
     @Test
-    public void secondTestLearner() {
+    public void secondLearnerTest() {
         logger.info("Starting secondTestLearner test");
 
         String userLoginNameValue = DefaultValues.DEFAULT_USERNAME_2016; // Use default username

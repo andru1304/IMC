@@ -1,10 +1,15 @@
 package org.automation.e2etesting;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import poms.*;
 
 import java.time.Duration;
 import java.util.Objects;
@@ -12,7 +17,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class FirstTestLearner extends BaseTest{
+public class FirstLearnerTest extends BaseTest {
     private LoginPage loginPage;
 
     @BeforeEach
@@ -21,8 +26,12 @@ public class FirstTestLearner extends BaseTest{
         loginPage.navigateToLoginPage();
         logger.info("Navigated to login page");
     }
+    @Epic("E2E Testing")
+    @Feature("Login and Course Enrollment")
+    @Story("Learner and Admin can login and enroll in a course")
+    @Description("This test verifies the login functionality for a learner user and an admin user, as well as the course enrollment process.")
     @Test
-    public void firstTestLearner() {
+    public void firstLearnerTest() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String userLoginNameValue = DefaultValues.DEFAULT_USERNAME_2012; // Use default username
         String userPasswordValue = DefaultValues.DEFAULT_PASSWORD_2012; // Use default password
@@ -239,24 +248,24 @@ public class FirstTestLearner extends BaseTest{
         driver.switchTo().frame("contentframe");
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe.x-component.x-fit-item.x-component-default")));
         adminParticipantManagerPage.cancellationListTab.click();
-        AdminCancellatioManagerPage adminCancellatioManagerPage = new AdminCancellatioManagerPage(driver);
+        AdminCancellationManagerPage adminCancellationManagerPage = new AdminCancellationManagerPage(driver);
         driver.switchTo().frame("iframe_c_participants_cancelled_person_3");
-        adminCancellatioManagerPage.searchParticipantName.click();
-        adminCancellatioManagerPage.searchParticipantName.sendKeys(userLoginNameValue);
-        adminCancellatioManagerPage.startSearchButton.click();
+        adminCancellationManagerPage.searchParticipantName.click();
+        adminCancellationManagerPage.searchParticipantName.sendKeys(userLoginNameValue);
+        adminCancellationManagerPage.startSearchButton.click();
 
         //user is found can be selected and removed from the course
-        assertTrue(adminCancellatioManagerPage.participantNameResults.getText().contains(userLoginNameValue));
+        assertTrue(adminCancellationManagerPage.participantNameResults.getText().contains(userLoginNameValue));
         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class, 'x-mask-msg-inner')]")));
-        adminCancellatioManagerPage.participantNameResults.click();
-        adminCancellatioManagerPage.participantButton.click();
-        adminCancellatioManagerPage.removeParticipantButton.click();
+        adminCancellationManagerPage.participantNameResults.click();
+        adminCancellationManagerPage.participantButton.click();
+        adminCancellationManagerPage.removeParticipantButton.click();
 
         //Click save and close from the upper left corner of the course manager
         driver.switchTo().defaultContent();
         driver.switchTo().frame("contentframe");
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe.x-component.x-fit-item.x-component-default")));
-        adminCancellatioManagerPage.defaultSaveCloseButton.click();
+        adminCancellationManagerPage.defaultSaveCloseButton.click();
 
         //Course participant administration manager is closed
         driver.switchTo().window(originalWindow);
