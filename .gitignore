@@ -11,6 +11,9 @@ target/
 *.iws
 *.iml
 *.ipr
+e2e-testing/
+.allure/
+screenshots/
 
 ### Eclipse ###
 .apt_generated
