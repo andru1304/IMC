@@ -26,9 +26,19 @@ IMC-Learning
     - Open a terminal and navigate to the project directory.
     - Use the following command to run all tests:
     - mvn test
-3. **Running a specific test class, use:**
-    - mvn -Dtest=FirstTestLearner test
+3. **Running a specific test using command line:**
+    - mvn test -Dtest="FirstLearnerTest"
+4. **Running all tests from test folder using command line:**
+   - mvn test
+5. **Running a specific test using command line and generate report using Allure:**
+   - mvn test -Dtest=FirstLearnerTest allure:report
+6. **Open the report using command line**
+   - mvn allure:report or allure open
+7. **Running all the test from a specific folder and open report using Allure:**
+   - mvn test allure:report allure:serve
 ## Assumptions and Notes
 - The tests are designed to be repeatable and should run independently of each other.
+- All the test has to be finish with Test ex: "myFirstTest"
 - Screenshots will be captured on test failures and saved in the screenshot's directory.
+- Using Allure plugin you can create reports
     
