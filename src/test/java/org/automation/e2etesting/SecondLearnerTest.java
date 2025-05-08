@@ -1,5 +1,6 @@
 package org.automation.e2etesting;
 
+import AllureScreenshot.ScreenshotUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -25,13 +26,13 @@ public class SecondLearnerTest extends BaseTest {
     @Description("This test verifies the login and catalogue functionality for a learner user.")
     @Test
     public void secondLearnerTest() {
-        logger.info("Starting secondTestLearner test");
+        logger.info("Starting secondLearnerTest test");
 
         String userLoginNameValue = DefaultValues.DEFAULT_USERNAME_2016; // Use default username
         String userPasswordValue = DefaultValues.DEFAULT_PASSWORD_2016; // Use default password
         String expectedLoginMessageText = "welcome back! Select a current course in order to continue learning.";
         String courseName = "Course SD New Course Room";
-
+        try {
         // Verify login page elements
         assertTrue(loginPage.userPassword.isDisplayed(), "User password field should be displayed");
         assertTrue(loginPage.loginButton.isEnabled(), "Login button should be enabled");
@@ -41,7 +42,7 @@ public class SecondLearnerTest extends BaseTest {
 
         // Access the main page
         MainPage mainPage = new MainPage(driver);
-        Utils.waitForElementToBeDisplayed(driver, MainPage.CATALOGUE_MENU_ITEM_LOCATOR, 10);
+        Utils.waitForElementToBeDisplayed(driver, MainPage.NAVIGATION_MENU_ITEM_LOCATOR, 10);
 
         // Verify main page elements
         assertTrue(mainPage.homeMenuItem.isDisplayed(), "Home menu item should be displayed");
@@ -129,7 +130,12 @@ public class SecondLearnerTest extends BaseTest {
         // Verify that the user is logged out
         assertTrue(loginPage.userPassword.isDisplayed(), "User password field should be displayed after logout");
         assertTrue(loginPage.loginButton.isEnabled(), "Login button should be enabled after logout");
-
-        logger.info("End secondTestLearner test");
+        } catch (Exception e) {
+            // Capture a screenshot on test failure
+            ScreenshotUtils.attachPageScreenshot(driver, "Test Failure Screenshot");
+            throw e;
+        } finally {
+            logger.info("End secondLearnerTest test");
+        }
     }
 }

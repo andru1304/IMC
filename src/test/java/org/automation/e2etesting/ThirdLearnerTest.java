@@ -1,5 +1,6 @@
 package org.automation.e2etesting;
 
+import AllureScreenshot.ScreenshotUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -31,7 +32,7 @@ public class ThirdLearnerTest extends BaseTest {
     @Description("This test verifies the login functionality for a learner user and an admin user.")
     @Test
     public void thirdLearnerTest() {
-        logger.info("Starting ThirdTestLearner test");
+        logger.info("Starting ThirdLearnerTest test");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         String userLoginNameValue = DefaultValues.DEFAULT_USERNAME_2015; // Use default username
         String userPasswordValue = DefaultValues.DEFAULT_PASSWORD_2015; // Use default password
@@ -42,6 +43,7 @@ public class ThirdLearnerTest extends BaseTest {
         String errorMassageExpected = "The login/password combination is not correct!";
         String errorMessageMultipleTimesExpected = "Either this user name does not exist in our system or it has been blocked. Please contact your system administrator.";
         //System is available and login dashboard page is displayed with available login options user and password field are available
+        try {
         assertTrue(loginPage.userPassword.isDisplayed());
         assertTrue(loginPage.userPassword.isDisplayed());
         assertTrue(loginPage.loginButton.isEnabled());
@@ -135,6 +137,12 @@ public class ThirdLearnerTest extends BaseTest {
         assertTrue(loginPage.userPassword.isDisplayed());
         assertTrue(loginPage.userPassword.isDisplayed());
         assertTrue(loginPage.loginButton.isEnabled());
-        logger.info("Starting ThirdTestLearner test");
+        } catch (Exception e) {
+            // Capture a screenshot on test failure
+            ScreenshotUtils.attachPageScreenshot(driver, "Test Failure Screenshot");
+            throw e;
+        } finally {
+            logger.info("Ending ThirdTestLearner test");
+        }
     }
 }

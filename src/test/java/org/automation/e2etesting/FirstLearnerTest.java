@@ -1,11 +1,13 @@
 package org.automation.e2etesting;
 
+import AllureScreenshot.ScreenshotUtils;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -14,8 +16,7 @@ import poms.*;
 import java.time.Duration;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FirstLearnerTest extends BaseTest {
     private LoginPage loginPage;
@@ -40,7 +41,8 @@ public class FirstLearnerTest extends BaseTest {
         String expectedLoginMessageText = "welcome back! Select a current course in order to continue learning.";
         String expectedCourseName = "DevOps Fundamentals: Tools and Techniques for Continuous Integration and Deployment";
         String searchCourseName = "DevOps Fundamentals Tools and Techniques";
-
+        logger.info("Starting firstLearnerTest test");
+        try {
         //System is available and login dashboard page is displayed with available login options user and password field are available
         assertTrue(loginPage.userPassword.isDisplayed());
         assertTrue(loginPage.userPassword.isDisplayed());
@@ -49,7 +51,6 @@ public class FirstLearnerTest extends BaseTest {
         //Login with the learner account
         loginPage.login(userLoginNameValue, userPasswordValue);
         MainPage mainPage = new MainPage(driver);
-
         //User can access the system and the system navigation is available and the personal dashboard is
         assertTrue(mainPage.systemNavigation.isDisplayed());
         assertTrue(mainPage.avatarUserMenu.isDisplayed());
@@ -91,6 +92,8 @@ public class FirstLearnerTest extends BaseTest {
         //Enroll to course by clicking on the enroll button
         cataloguePage.courseInfoButtonEnrolCourse.click();
         cataloguePage.enrolmentProceedButton.click();
+        boolean test = cataloguePage.syllabusElement.isDisplayed();
+        //Utils.waitForActionToHappen(driver, 10,);
         wait.until(ExpectedConditions.visibilityOf(cataloguePage.syllabusElement));
 
         //Course enrollment is possible and course room is opened and the syllabus is displayed
@@ -128,6 +131,7 @@ public class FirstLearnerTest extends BaseTest {
         //First media tile has passed status and course progress is 50%
         String progressStyle = cataloguePage.progressBarIndicator.getAttribute("style");
         Utils.sleepInSeconds(1);
+        assertNotNull(progressStyle);
         assertTrue(progressStyle.contains("50%"));
 
         //Open the second media and conclude it and check course progress and status
@@ -165,7 +169,7 @@ public class FirstLearnerTest extends BaseTest {
         adminMainPage.btnAdminAdmin.click();
 
         //Admin context is selected and admin navigation options are available
-        assertTrue(adminMainPage.adminContent.isEnabled());
+        assertTrue(adminMainPage.adminContent.isDisplayed());
 
         //Select Content from the navigation menu and from the dropdown menu select courses
         adminMainPage.adminContent.click();
@@ -273,5 +277,12 @@ public class FirstLearnerTest extends BaseTest {
         System.out.println("Current Tab URL: " + currentTabUrl1);
         mainPage.avatarUserMenu.click();
         mainPage.logOutSection.click();
+        } catch (Exception e) {
+            // Capture a screenshot on test failure
+            ScreenshotUtils.attachPageScreenshot(driver, "Test Failure Screenshot");
+            throw e;
+        } finally {
+            logger.info("Ending FirsLearnerTest test");
+        }
     }
 }

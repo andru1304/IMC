@@ -14,6 +14,7 @@ target/
 e2e-testing/
 .allure/
 screenshots/
+allure-results/
 
 ### Eclipse ###
 .apt_generated

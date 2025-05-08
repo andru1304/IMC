@@ -28,6 +28,7 @@ public class LoginPage {
     // Method to navigate to the login page
     public void navigateToLoginPage() {
         driver.get(URL); // Use the URL constant here
+        Utils.sleepInSeconds(1);
     }
     // Method to log in
     public void login(String username, String password) {
