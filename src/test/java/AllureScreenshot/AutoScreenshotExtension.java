@@ -1,4 +1,4 @@
-package AllureScreenshot;
+package allureScreenshot;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.TestExecutionExceptionHandler;
@@ -19,7 +19,7 @@ public class AutoScreenshotExtension implements TestExecutionExceptionHandler {
         final WebDriver webDriver = this.driverSupplier.apply(context);
         if (Objects.nonNull(webDriver)) {
             final String attachmentName = "Screenshot on failure (" + throwable.getClass().getSimpleName() + ")";
-            ScreenshotUtils.attachPageScreenshot(webDriver, attachmentName);
+            AllureScreenshot.ScreenshotUtils.attachPageScreenshot(webDriver, attachmentName);
         }
 
         throw throwable;

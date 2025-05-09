@@ -1,4 +1,4 @@
-package AllureScreenshot;
+package allureScreenshot;
 
 import io.qameta.allure.Allure;
 import org.openqa.selenium.OutputType;

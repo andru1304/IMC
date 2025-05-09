@@ -1,4 +1,4 @@
-package AllureScreenshot;
+package allureScreenshot;
 
 import org.junit.jupiter.api.extension.*;
 import org.openqa.selenium.WebDriver;

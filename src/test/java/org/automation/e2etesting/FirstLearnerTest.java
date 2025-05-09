@@ -1,14 +1,13 @@
 package org.automation.e2etesting;
 
-import AllureScreenshot.AutoScreenshotExtension;
-import AllureScreenshot.ScreenshotUtils;
-import AllureScreenshot.WebdriverExtension;
+import allureScreenshot.AutoScreenshotExtension;
+import allureScreenshot.ScreenshotUtils;
+import allureScreenshot.WebdriverExtension;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
