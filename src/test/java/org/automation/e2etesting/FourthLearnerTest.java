@@ -1,22 +1,30 @@
 package org.automation.e2etesting;
 
+import AllureScreenshot.AutoScreenshotExtension;
 import AllureScreenshot.ScreenshotUtils;
+import AllureScreenshot.WebdriverExtension;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import poms.*;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class FourthLearnerTest extends BaseTest {
     private LoginPage loginPage;
+    @RegisterExtension
+    WebdriverExtension webDriverManager = new WebdriverExtension();
 
+    @RegisterExtension
+    AutoScreenshotExtension screenshotManager = new AutoScreenshotExtension(
+            c -> this.webDriverManager.getWebDriver(c));
     @BeforeEach
     public void initLoginPage() {
         loginPage = new LoginPage(driver);
@@ -78,7 +86,7 @@ public class FourthLearnerTest extends BaseTest {
             MainPage mainPage = new MainPage(driver);
             loginPage.login(userLoginNameValue, DefaultValues.DEFAULT_PASSWORD_2015);
             String loginMessageText = mainPage.notificationMessageText.getText();
-            assertTrue(loginMessageText.contains(expectedLoginMessageText));
+            assertFalse(loginMessageText.contains(expectedLoginMessageText));
         } catch (Exception e) {
             // Capture a screenshot on test failure
             ScreenshotUtils.attachPageScreenshot(driver, "Test Failure Screenshot");

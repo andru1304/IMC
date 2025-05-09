@@ -1,19 +1,26 @@
 package org.automation.e2etesting;
 
+import AllureScreenshot.AutoScreenshotExtension;
 import AllureScreenshot.ScreenshotUtils;
+import AllureScreenshot.WebdriverExtension;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.RegisterExtension;
 import poms.*;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SecondLearnerTest extends BaseTest {
     private LoginPage loginPage;
+    @RegisterExtension
+    WebdriverExtension webDriverManager = new WebdriverExtension();
 
+    @RegisterExtension
+    AutoScreenshotExtension screenshotManager = new AutoScreenshotExtension(
+            c -> this.webDriverManager.getWebDriver(c));
     @BeforeEach
     public void initLoginPage() {
         loginPage = new LoginPage(driver);
