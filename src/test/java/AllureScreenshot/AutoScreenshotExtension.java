@@ -19,7 +19,7 @@ public class AutoScreenshotExtension implements TestExecutionExceptionHandler {
         final WebDriver webDriver = this.driverSupplier.apply(context);
         if (Objects.nonNull(webDriver)) {
             final String attachmentName = "Screenshot on failure (" + throwable.getClass().getSimpleName() + ")";
-            AllureScreenshot.ScreenshotUtils.attachPageScreenshot(webDriver, attachmentName);
+            allureScreenshot.ScreenshotUtils.attachPageScreenshot(webDriver, attachmentName);
         }
 
         throw throwable;
